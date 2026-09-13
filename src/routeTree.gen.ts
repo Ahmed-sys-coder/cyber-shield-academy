@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as PasswordsRouteImport } from './routes/passwords'
 import { Route as PhishingRouteImport } from './routes/phishing'
+import { Route as SocialMediaRouteImport } from './routes/social-media'
 import { Route as TopicsRouteImport } from './routes/topics'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const PhishingRoute = PhishingRouteImport.update({
   path: '/phishing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SocialMediaRoute = SocialMediaRouteImport.update({
+  id: '/social-media',
+  path: '/social-media',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TopicsRoute = TopicsRouteImport.update({
   id: '/topics',
   path: '/topics',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/passwords': typeof PasswordsRoute
   '/phishing': typeof PhishingRoute
+  '/social-media': typeof SocialMediaRoute
   '/topics': typeof TopicsRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/home': typeof HomeRoute
   '/passwords': typeof PasswordsRoute
   '/phishing': typeof PhishingRoute
+  '/social-media': typeof SocialMediaRoute
   '/topics': typeof TopicsRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,23 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/passwords': typeof PasswordsRoute
   '/phishing': typeof PhishingRoute
+  '/social-media': typeof SocialMediaRoute
   '/topics': typeof TopicsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/home' | '/passwords' | '/phishing' | '/topics'
+  fullPaths:
+    '/' | '/home' | '/passwords' | '/phishing' | '/social-media' | '/topics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/home' | '/passwords' | '/phishing' | '/topics'
-  id: '__root__' | '/' | '/home' | '/passwords' | '/phishing' | '/topics'
+  to: '/' | '/home' | '/passwords' | '/phishing' | '/social-media' | '/topics'
+  id:
+    | '__root__'
+    | '/'
+    | '/home'
+    | '/passwords'
+    | '/phishing'
+    | '/social-media'
+    | '/topics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +93,7 @@ export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   PasswordsRoute: typeof PasswordsRoute
   PhishingRoute: typeof PhishingRoute
+  SocialMediaRoute: typeof SocialMediaRoute
   TopicsRoute: typeof TopicsRoute
 }
 
@@ -109,6 +127,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhishingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/social-media': {
+      id: '/social-media'
+      path: '/social-media'
+      fullPath: '/social-media'
+      preLoaderRoute: typeof SocialMediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/topics': {
       id: '/topics'
       path: '/topics'
@@ -124,6 +149,7 @@ const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
   PasswordsRoute: PasswordsRoute,
   PhishingRoute: PhishingRoute,
+  SocialMediaRoute: SocialMediaRoute,
   TopicsRoute: TopicsRoute,
 }
 export const routeTree = rootRouteImport

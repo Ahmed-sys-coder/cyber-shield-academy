@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HomeRouteImport } from './routes/home'
+import { Route as PhishingRouteImport } from './routes/phishing'
 import { Route as TopicsRouteImport } from './routes/topics'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const HomeRoute = HomeRouteImport.update({
   path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PhishingRoute = PhishingRouteImport.update({
+  id: '/phishing',
+  path: '/phishing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TopicsRoute = TopicsRouteImport.update({
   id: '/topics',
   path: '/topics',
@@ -32,30 +38,34 @@ const TopicsRoute = TopicsRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
+  '/phishing': typeof PhishingRoute
   '/topics': typeof TopicsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
+  '/phishing': typeof PhishingRoute
   '/topics': typeof TopicsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/home': typeof HomeRoute
+  '/phishing': typeof PhishingRoute
   '/topics': typeof TopicsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/home' | '/topics'
+  fullPaths: '/' | '/home' | '/phishing' | '/topics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/home' | '/topics'
-  id: '__root__' | '/' | '/home' | '/topics'
+  to: '/' | '/home' | '/phishing' | '/topics'
+  id: '__root__' | '/' | '/home' | '/phishing' | '/topics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HomeRoute: typeof HomeRoute
+  PhishingRoute: typeof PhishingRoute
   TopicsRoute: typeof TopicsRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/phishing': {
+      id: '/phishing'
+      path: '/phishing'
+      fullPath: '/phishing'
+      preLoaderRoute: typeof PhishingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/topics': {
       id: '/topics'
       path: '/topics'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HomeRoute: HomeRoute,
+  PhishingRoute: PhishingRoute,
   TopicsRoute: TopicsRoute,
 }
 export const routeTree = rootRouteImport

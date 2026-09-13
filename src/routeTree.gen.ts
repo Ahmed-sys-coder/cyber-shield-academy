@@ -14,6 +14,7 @@ import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as PasswordsRouteImport } from './routes/passwords'
 import { Route as PhishingRouteImport } from './routes/phishing'
+import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as ScamsRouteImport } from './routes/scams'
 import { Route as SocialMediaRouteImport } from './routes/social-media'
 import { Route as TopicsRouteImport } from './routes/topics'
@@ -43,6 +44,11 @@ const PhishingRoute = PhishingRouteImport.update({
   path: '/phishing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ScamsRoute = ScamsRouteImport.update({
   id: '/scams',
   path: '/scams',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/passwords': typeof PasswordsRoute
   '/phishing': typeof PhishingRoute
+  '/quiz': typeof QuizRoute
   '/scams': typeof ScamsRoute
   '/social-media': typeof SocialMediaRoute
   '/topics': typeof TopicsRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/home': typeof HomeRoute
   '/passwords': typeof PasswordsRoute
   '/phishing': typeof PhishingRoute
+  '/quiz': typeof QuizRoute
   '/scams': typeof ScamsRoute
   '/social-media': typeof SocialMediaRoute
   '/topics': typeof TopicsRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/passwords': typeof PasswordsRoute
   '/phishing': typeof PhishingRoute
+  '/quiz': typeof QuizRoute
   '/scams': typeof ScamsRoute
   '/social-media': typeof SocialMediaRoute
   '/topics': typeof TopicsRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/passwords'
     | '/phishing'
+    | '/quiz'
     | '/scams'
     | '/social-media'
     | '/topics'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/passwords'
     | '/phishing'
+    | '/quiz'
     | '/scams'
     | '/social-media'
     | '/topics'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/passwords'
     | '/phishing'
+    | '/quiz'
     | '/scams'
     | '/social-media'
     | '/topics'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   PasswordsRoute: typeof PasswordsRoute
   PhishingRoute: typeof PhishingRoute
+  QuizRoute: typeof QuizRoute
   ScamsRoute: typeof ScamsRoute
   SocialMediaRoute: typeof SocialMediaRoute
   TopicsRoute: typeof TopicsRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhishingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/scams': {
       id: '/scams'
       path: '/scams'
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
   PasswordsRoute: PasswordsRoute,
   PhishingRoute: PhishingRoute,
+  QuizRoute: QuizRoute,
   ScamsRoute: ScamsRoute,
   SocialMediaRoute: SocialMediaRoute,
   TopicsRoute: TopicsRoute,

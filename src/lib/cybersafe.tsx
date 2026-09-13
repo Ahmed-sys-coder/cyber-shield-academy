@@ -144,13 +144,10 @@ export function CyberSafeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const finish = useCallback(() => {
-    let score = 0;
-    setAnswers((prev) => {
-      score = prev.reduce<number>((acc, a, i) => (a === QUIZ_QUESTIONS[i].answer ? acc + 1 : acc), 0);
-      setLastScore(score);
-      return prev;
-    });
-    const computed = answers.reduce<number>((acc, a, i) => (a === QUIZ_QUESTIONS[i].answer ? acc + 1 : acc), 0);
+    const computed = answers.reduce<number>(
+      (acc, a, i) => (a !== null && a === QUIZ_QUESTIONS[i]?.answer ? acc + 1 : acc),
+      0,
+    );
     setLastScore(computed);
     return computed;
   }, [answers]);

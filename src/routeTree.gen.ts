@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AssistantRouteImport } from './routes/assistant'
+import { Route as HomeRouteImport } from './routes/home'
+import { Route as PasswordsRouteImport } from './routes/passwords'
+import { Route as PhishingRouteImport } from './routes/phishing'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as ScamsRouteImport } from './routes/scams'
+import { Route as SocialMediaRouteImport } from './routes/social-media'
+import { Route as TopicsRouteImport } from './routes/topics'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PasswordsRoute = PasswordsRouteImport.update({
+  id: '/passwords',
+  path: '/passwords',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhishingRoute = PhishingRouteImport.update({
+  id: '/phishing',
+  path: '/phishing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScamsRoute = ScamsRouteImport.update({
+  id: '/scams',
+  path: '/scams',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SocialMediaRoute = SocialMediaRouteImport.update({
+  id: '/social-media',
+  path: '/social-media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TopicsRoute = TopicsRouteImport.update({
+  id: '/topics',
+  path: '/topics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
+  '/home': typeof HomeRoute
+  '/passwords': typeof PasswordsRoute
+  '/phishing': typeof PhishingRoute
+  '/quiz': typeof QuizRoute
+  '/scams': typeof ScamsRoute
+  '/social-media': typeof SocialMediaRoute
+  '/topics': typeof TopicsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
+  '/home': typeof HomeRoute
+  '/passwords': typeof PasswordsRoute
+  '/phishing': typeof PhishingRoute
+  '/quiz': typeof QuizRoute
+  '/scams': typeof ScamsRoute
+  '/social-media': typeof SocialMediaRoute
+  '/topics': typeof TopicsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
+  '/home': typeof HomeRoute
+  '/passwords': typeof PasswordsRoute
+  '/phishing': typeof PhishingRoute
+  '/quiz': typeof QuizRoute
+  '/scams': typeof ScamsRoute
+  '/social-media': typeof SocialMediaRoute
+  '/topics': typeof TopicsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/assistant'
+    | '/home'
+    | '/passwords'
+    | '/phishing'
+    | '/quiz'
+    | '/scams'
+    | '/social-media'
+    | '/topics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/assistant'
+    | '/home'
+    | '/passwords'
+    | '/phishing'
+    | '/quiz'
+    | '/scams'
+    | '/social-media'
+    | '/topics'
+  id:
+    | '__root__'
+    | '/'
+    | '/assistant'
+    | '/home'
+    | '/passwords'
+    | '/phishing'
+    | '/quiz'
+    | '/scams'
+    | '/social-media'
+    | '/topics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistantRoute: typeof AssistantRoute
+  HomeRoute: typeof HomeRoute
+  PasswordsRoute: typeof PasswordsRoute
+  PhishingRoute: typeof PhishingRoute
+  QuizRoute: typeof QuizRoute
+  ScamsRoute: typeof ScamsRoute
+  SocialMediaRoute: typeof SocialMediaRoute
+  TopicsRoute: typeof TopicsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passwords': {
+      id: '/passwords'
+      path: '/passwords'
+      fullPath: '/passwords'
+      preLoaderRoute: typeof PasswordsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/phishing': {
+      id: '/phishing'
+      path: '/phishing'
+      fullPath: '/phishing'
+      preLoaderRoute: typeof PhishingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scams': {
+      id: '/scams'
+      path: '/scams'
+      fullPath: '/scams'
+      preLoaderRoute: typeof ScamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/social-media': {
+      id: '/social-media'
+      path: '/social-media'
+      fullPath: '/social-media'
+      preLoaderRoute: typeof SocialMediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/topics': {
+      id: '/topics'
+      path: '/topics'
+      fullPath: '/topics'
+      preLoaderRoute: typeof TopicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistantRoute: AssistantRoute,
+  HomeRoute: HomeRoute,
+  PasswordsRoute: PasswordsRoute,
+  PhishingRoute: PhishingRoute,
+  QuizRoute: QuizRoute,
+  ScamsRoute: ScamsRoute,
+  SocialMediaRoute: SocialMediaRoute,
+  TopicsRoute: TopicsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

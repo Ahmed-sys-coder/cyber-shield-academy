@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -11,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { CyberSafeProvider } from "../lib/cybersafe";
+import { BottomNav } from "../components/BottomNav";
 
 function NotFoundComponent() {
   return (
@@ -77,14 +80,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "CyberSafe — Cyber Safety Awareness" },
+      {
+        name: "description",
+        content: "Student-friendly cyber safety lessons on phishing, passwords, scams and online privacy.",
+      },
+      { property: "og:title", content: "CyberSafe — Cyber Safety Awareness" },
+      {
+        property: "og:description",
+        content: "Student-friendly cyber safety lessons on phishing, passwords, scams and online privacy.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -116,11 +123,22 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isSplash = pathname === "/";
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <CyberSafeProvider>
+        <div className="min-h-[100dvh] bg-muted/60 py-0 sm:py-6">
+          <div className="mx-auto flex min-h-[100dvh] w-full max-w-[420px] flex-col overflow-hidden bg-background sm:min-h-[min(860px,calc(100dvh-3rem))] sm:rounded-[2rem] sm:border sm:border-border sm:shadow-2xl">
+            <main className="flex-1 overflow-y-auto">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </main>
+            {isSplash ? null : <BottomNav />}
+          </div>
+        </div>
+      </CyberSafeProvider>
     </QueryClientProvider>
   );
 }

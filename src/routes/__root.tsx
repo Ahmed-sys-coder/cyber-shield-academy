@@ -120,11 +120,22 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isSplash = pathname === "/";
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <CyberSafeProvider>
+        <div className="min-h-[100dvh] bg-muted/60 py-0 sm:py-6">
+          <div className="mx-auto flex min-h-[100dvh] w-full max-w-[420px] flex-col overflow-hidden bg-background sm:min-h-[min(860px,calc(100dvh-3rem))] sm:rounded-[2rem] sm:border sm:border-border sm:shadow-2xl">
+            <main className="flex-1 overflow-y-auto">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </main>
+            {isSplash ? null : <BottomNav />}
+          </div>
+        </div>
+      </CyberSafeProvider>
     </QueryClientProvider>
   );
 }
